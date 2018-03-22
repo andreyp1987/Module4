@@ -18,14 +18,15 @@ const randomStr = KeyboardLayout[row - 1];
 const randomIndex = callback(randomStr);
 return randomStr[randomIndex];
 }
+
+const getRow = +prompt('Введите номер строки от 1 до 3');
+if ((isNaN(getRow))   || (getRow  % 1 !== 0) || (getRow  <= 0) || ( 3 < getRow) ) {
+    alert("Недопустимое значение, проверте правильность ввода!")
+}
   
-const randomCharInRow1 = getRandCharInRow(1, getRandomItem)
-const randomCharInRow2 = getRandCharInRow(2, getRandomItem)
-const randomCharInRow3 = getRandCharInRow(3, getRandomItem)
-console.log (`Случайный символ из 1-ой строки - ${randomCharInRow1}`)
-console.log (`Случайный символ из 2-ой строки - ${randomCharInRow2}`)
-console.log (`Случайный символ из 3-ой строки - ${randomCharInRow3}`)
- 
+const randomCharInRow1 = getRandCharInRow(getRow, getRandomItem)
+console.log (`Случайный символ из ${getRow}-ой строки - ${randomCharInRow1}`)
+
 function getRandCharInAlph (arr, callback) {  
 const randomStr = callback(arr);
 const randomChar = callback(arr[randomStr]);  
