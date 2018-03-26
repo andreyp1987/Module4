@@ -4,33 +4,37 @@ const keybord =  str.split('');
 const fullKeyboard = [keybord.slice(0, keybord.indexOf('a')), keybord.slice(keybord.indexOf('a'), keybord.indexOf('z')), keybord.slice(keybord.indexOf('z'))]
 return fullKeyboard
 };
-console.log (addKeyboardLayout(alphabet));
 const KeyboardLayout = addKeyboardLayout(alphabet);
 
+let getRow;
+let rowIndex;
+
+function getUserRow (callback) {
+while (true) {  
+  getRow = prompt('Введите номер строки от 1 до 3');
+    if (getRow === null) {
+      return;
+};
+  getRow = +getRow;
+    if (Number.isInteger(getRow) && getRow <= 3 && getRow >= 1) { 
+      rowIndex = getRow - 1;
+        break;
+};
+};
+
+const randIndex = callback(KeyboardLayout[rowIndex]);
+console.log(`Случайный символ из ${getRow}-й строки - ${KeyboardLayout[rowIndex][randIndex]}`);
+}
+getUserRow(getRandomItem);
 
 function getRandomItem(arr){
-const randomItem = Math.floor(Math.random() * arr.length);
-return randomItem;
-}
-  
-function getRandCharInRow(row, callback) {
-const randomStr = KeyboardLayout[row - 1];
-const randomIndex = callback(randomStr);
-return randomStr[randomIndex];
-}
-
-const getRow = +prompt('Введите номер строки от 1 до 3');
-if ((isNaN(getRow))   || (getRow  % 1 !== 0) || (getRow  <= 0) || ( 3 < getRow) ) {
-    alert("Недопустимое значение, проверте правильность ввода!")
-}
-  
-const randomCharInRow1 = getRandCharInRow(getRow, getRandomItem)
-console.log (`Случайный символ из ${getRow}-ой строки - ${randomCharInRow1}`)
-
+  return Math.floor(Math.random() * arr.length);
+};
+    
 function getRandCharInAlph (arr, callback) {  
 const randomStr = callback(arr);
 const randomChar = callback(arr[randomStr]);  
-return arr[randomStr][randomChar];
+  return arr[randomStr][randomChar];
 }
   
 const randomAlphabetChar = getRandCharInAlph(KeyboardLayout, getRandomItem);
